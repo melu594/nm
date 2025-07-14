@@ -1,0 +1,103 @@
+<script>
+  const malla = {
+    "Primer año (CBC)": {
+      "1er Cuatrimestre": [
+        ["Pensamiento Científico", "pensamiento_cientifico"],
+        ["Sociedad y Estado", "sociedad_estado"],
+        ["Pensamiento Computacional", "pensamiento_computacional"],
+        ["Física", "fisica"],
+        ["Análisis Matemático A", "analisis_matematico_a"],
+        ["Álgebra A", "algebra_a"]
+      ]
+    },
+    "Segundo año": {
+      "3er Cuatrimestre": [
+        ["Análisis Matemático II", "analisis_matematico_ii"],
+        ["Física de los Sistemas de Partículas", "fisica_particulas"],
+        ["Introducción a la Ingeniería Electrónica", "intro_ie"],
+        ["Algoritmos y Programación", "algoritmos"]
+      ],
+      "4to Cuatrimestre": [
+        ["Álgebra Lineal", "algebra_lineal"],
+        ["Electricidad, Magnetismo y Calor", "electricidad_magnetismo"],
+        ["Introducción a los Dispositivos Electrónicos", "intro_dispositivos"],
+        ["Sistemas Digitales", "sistemas_digitales"]
+      ]
+    },
+    "Tercer año": {
+      "5to Cuatrimestre": [
+        ["Probabilidad y Estadística", "probabilidad"],
+        ["Señales y Sistemas", "senales"],
+        ["Análisis de Circuitos", "circuitos"],
+        ["Redes de Comunicaciones", "redes"]
+      ],
+      "6to Cuatrimestre": [
+        ["Planificación de Proyectos", "planificacion"],
+        ["Circuitos Microelectrónicos", "microelectronicos"],
+        ["Procesos Estocásticos", "estocasticos"],
+        ["Control Automático", "control"],
+        ["Taller de Sistemas Embebidos", "embebidos"]
+      ]
+    },
+    "Cuarto año": {
+      "7mo Cuatrimestre": [
+        ["Química y Electroquímica", "quimica"],
+        ["Electromagnetismo Aplicado", "electromagnetismo"],
+        ["Taller de Automatización y Control", "automatizacion"],
+        ["Taller de Procesamiento de Señales", "procesamiento"]
+      ],
+      "8vo Cuatrimestre": [
+        ["Dispositivos Semiconductores", "semiconductores"],
+        ["Taller de Comunicaciones Digitales", "comunicaciones"],
+        ["Taller de Diseño de Circuitos Electrónicos", "diseno"],
+        ["Higiene y Seguridad", "higiene"],
+        ["Electivas / Optativas", "optativas_1"]
+      ]
+    },
+    "Quinto año": {
+      "9no Cuatrimestre": [
+        ["Legislación y Ejercicio Profesional", "legislacion"],
+        ["Gestión de Proyectos Electrónicos", "gestion"],
+        ["Trabajo Integrador Final I", "tif1"],
+        ["Electivas / Optativas", "optativas_2"]
+      ],
+      "10mo Cuatrimestre": [
+        ["Impacto Social, Ambiental y Desarrollo Sustentable", "impacto"],
+        ["Trabajo Integrador Final II", "tif2"],
+        ["Electivas / Optativas", "optativas_3"]
+      ]
+    }
+  };
+
+  const container = document.querySelector(".container");
+
+  function renderMalla() {
+    for (const [anio, cuatris] of Object.entries(malla)) {
+      const bloque = document.createElement("div");
+      bloque.className = "year-block";
+      bloque.innerHTML = `<div class="year">${anio}</div><div class="cuatrimestres"></div>`;
+      const cuatrisContainer = bloque.querySelector(".cuatrimestres");
+
+      for (const [cuatrimestre, materias] of Object.entries(cuatris)) {
+        const cuatriDiv = document.createElement("div");
+        cuatriDiv.className = "cuatrimestre";
+        cuatriDiv.innerHTML = `<h3>${cuatrimestre}</h3>`;
+
+        materias.forEach(([nombre, id]) => {
+          cuatriDiv.innerHTML += `
+            <div class="materia">
+              <div class="card" data-id="${id}">${nombre}</div>
+              <input type="number" class="nota-input" placeholder="Nota" data-id="${id}">
+            </div>
+          `;
+        });
+
+        cuatrisContainer.appendChild(cuatriDiv);
+      }
+
+      container.appendChild(bloque);
+    }
+  }
+
+  renderMalla();
+</script>
